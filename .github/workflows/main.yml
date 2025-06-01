@@ -2,14 +2,18 @@ name: Keep Render Alive
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # 每 5 分鐘執行一次（UTC）
-  workflow_dispatch:        # 支援手動觸發
+    - cron: '0 * * * *'   # 每小時一次
+  workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Ping Render App
+    - name: Simulate every 5-min ping for 30 minutes
       run: |
-        curl -m 60 https://linebotpipibear.onrender.com || echo "Ping failed"
+        for i in {1..6}; do
+          echo "[$(date)] Ping #$i"
+          curl -m 30 https://linebotpipibear.onrender.com || echo "Failed"
+          sleep 300
+        done
