@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Simulate every 5-min ping for 30 minutes
       run: |
-        for i in {1..6}; do
+        for i in {1..12}; do
           echo "[$(date)] Ping #$i"
           curl -m 30 https://linebotpipibear.onrender.com || echo "Failed"
           sleep 300
